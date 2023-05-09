@@ -1,0 +1,18 @@
+[
+  {
+    "id": "text-field",
+    "text": "Text Field"
+  },
+  {
+    "id": "drop-down",
+    "text": "Drop Down"
+  },
+  {
+    "id": "check-box",
+    "text": "Check Box"
+  },
+  {
+    "id": "date-picker",
+    "text": "Date-Picker"
+  }
+]

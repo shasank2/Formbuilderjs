@@ -1,0 +1,9 @@
+.nav-items {
+  margin: 0 5px 0 5px;
+  border-bottom: solid 2px transparent;
+  cursor: pointer;
+}
+
+.nav-items:hover {
+  border-bottom: solid 2px black;
+}

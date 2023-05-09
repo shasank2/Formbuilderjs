@@ -1,0 +1,27 @@
+.droppable-zone {
+  border: 1px solid rgb(198, 198, 198);
+  border-radius: 5px;
+  background-color: rgb(244, 244, 244);
+  height: 93vh;
+}
+
+.droppable-items {
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 5px;
+  padding: 6px;
+  margin: 6px;
+  cursor: pointer;
+}
+
+.droppable-items:hover{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.droppable-items-selected {
+  border: 1px solid rgb(224, 130, 130);
+  border-radius: 5px;
+  padding: 6px;
+  margin: 6px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}

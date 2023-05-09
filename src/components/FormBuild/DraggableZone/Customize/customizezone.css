@@ -1,0 +1,7 @@
+/* CUSTOMIZE ZONE CSS */
+.customize-container{
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
