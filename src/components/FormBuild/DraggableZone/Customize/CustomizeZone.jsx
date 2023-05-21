@@ -1,6 +1,6 @@
 import { Button, Form } from 'react-bootstrap'
 import './customizezone.css'
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { GlobalContext } from '../../../../context/GlobalContext';
 import DropDownOptions from './SpecialCustomizations/DropDownOptions/DropDownOptions';
 import { basicValidationFunction } from "../../../../validationSchema/BasicFieldsValidation"
@@ -13,11 +13,12 @@ const CustomizeZone = (props) => {
 
   const { selectedItem, setSelectedItem } = props
   const { formState, setformState, specialCustomizationStep, setSpecialCustomizationStep } = useContext(GlobalContext);
+  const [fieldType, setFieldType] = useState(null)
 
-  const { register, handleSubmit, getValues, setValue, formState: { errors,touchedFields} } = useForm({
+  const { register, handleSubmit, getValues, setValue, watch, formState: { errors } } = useForm({
     resolver: yupResolver(basicValidationFunction())
   });
-console.log(touchedFields)
+
   const [individualItemState, setIndividualItemState] = useState({
     type: "",
     text: "",
@@ -25,16 +26,18 @@ console.log(touchedFields)
     name: "",
     label: "",
     isRequried: false,
-    validationMessage: "oiasjdioj",
+    validationMessage: "",
   })
 
   useEffect(() => {
     let foundSelectedObject = formState.find((elem) => elem.id === selectedItem)
-    setIndividualItemState((prev) => ({
-      ...prev,
-      ...foundSelectedObject
-    }))
-
+    // setIndividualItemState((prev) => ({
+    //   ...prev,
+    //   ...foundSelectedObject
+    // }))
+    // console.log(foundSelectedObject)
+    setValue("selectedState", foundSelectedObject)
+    setFieldType(watch("selectedState.type"));
   }, [selectedItem])
 
   const onSubmit = async () => {
@@ -47,7 +50,6 @@ console.log(touchedFields)
     setformState(updatedArray)
   }
 
-  console.log(errors)
   return (
     <Form className='customize-container' onSubmit={handleSubmit(onSubmit)} >
 
@@ -59,36 +61,38 @@ console.log(touchedFields)
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Label</Form.Label>
                 <Form.Control
-                  {...register("label")}
+                  {...register("selectedState.label")}
                   type="text" autoComplete="new-password"
-                  name='label'
-                  onChange={(e) => setIndividualItemState((prev) => ({ ...prev, label: e.target.value }))}
-                  value={individualItemState.label}
-                  isInvalid={!!errors?.label?.message}
+                  // name='label'
+                  // onChange={(e) => setIndividualItemState((prev) => ({ ...prev, label: e.target.value }))}
+                  // value={individualItemState.label}
+                  isInvalid={!!errors?.selectedState?.label?.message}
                 />
-               {errors?.label && <Form.Control.Feedback type="invalid">{errors?.label.message}</Form.Control.Feedback>}
+                {errors?.selectedState?.label && <Form.Control.Feedback type="invalid">{errors?.selectedState?.label.message}</Form.Control.Feedback>}
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
-                  {...register("name")}
+                  {...register("selectedState.name",{
+                    onChange:
+                  }) }
                   type="text" autoComplete="new-password"
-                  name='name'
-                  onChange={(e) => setIndividualItemState((prev) => ({
-                    ...prev,
-                    name: e.target.value.toLowerCase()
-                      .replace(/ /g, '-')
-                      .replace(/[^\w-]+/g, '')
-                  }))}
-                  value={individualItemState.name}
-                  isInvalid={!!errors?.name?.message}
+                  // name='name'
+                  // onChange={(e) => setIndividualItemState((prev) => ({
+                  //   ...prev,
+                  //   name: e.target.value.toLowerCase()
+                  //     .replace(/ /g, '-')
+                  //     .replace(/[^\w-]+/g, '')
+                  // }))}
+                  // value={individualItemState.name}
+                  isInvalid={!!errors?.selectedState?.name?.message}
                 />
-               {errors?.name && <Form.Control.Feedback type="invalid">{errors?.name.message}</Form.Control.Feedback>}
+                {errors?.selectedState?.name && <Form.Control.Feedback type="invalid">{errors?.selectedState?.name.message}</Form.Control.Feedback>}
               </Form.Group>
 
               {
-                individualItemState.type === DROPDOWN ?
+                fieldType === DROPDOWN ?
                   <Button variant="primary" type="button" style={{ width: "100%" }} onClick={() => setSpecialCustomizationStep(DROPDOWNSTEP)} >
                     Edit Options
                   </Button>
@@ -103,23 +107,23 @@ console.log(touchedFields)
                 label="Is Required"
                 className="mb-3"
                 id="isRequired"
-                {...register("isRequired")}
-                onChange={(e) => { setIndividualItemState((prev) => ({ ...prev, isRequried: e.target.checked })), setValue("isRequried", e.target.checked) }}
-                checked={individualItemState.isRequried}
+                {...register("selectedState.isRequired")}
+              // onChange={(e) => { setIndividualItemState((prev) => ({ ...prev, isRequried: e.target.checked })), setValue("isRequried", e.target.checked) }}
+              // checked={individualItemState.isRequried}
               />
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Validation Message</Form.Label>
                 <Form.Control type="text"
-                  {...register("validationMessage")}
+                  {...register("selectedState.validationMessage")}
                   disabled={!individualItemState.isRequried}
                   autoComplete="new-password"
-                  onChange={(e) => setIndividualItemState((prev) => ({ ...prev, validationMessage: e.target.value }))}
-                  value={individualItemState.validationMessage}
-                  name='validationMessage'
+                  // onChange={(e) => setIndividualItemState((prev) => ({ ...prev, validationMessage: e.target.value }))}
+                  // value={individualItemState.validationMessage}
+                  // name='validationMessage'
                   isInvalid={!!errors.validationMessage?.message}
                 />
-               {errors.validationMessage && <Form.Control.Feedback type="invalid">{errors.validationMessage.message}</Form.Control.Feedback>}
+                {errors.validationMessage && <Form.Control.Feedback type="invalid">{errors.validationMessage.message}</Form.Control.Feedback>}
               </Form.Group>
             </div>
           </>
