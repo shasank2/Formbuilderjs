@@ -12,6 +12,7 @@ export const basicValidationFunction = (formType) => {
         is: true,
         then: () => Yup.string().required("This field is required"),
       })
+
     })
   })
   // if (formType === DROPDOWN) {

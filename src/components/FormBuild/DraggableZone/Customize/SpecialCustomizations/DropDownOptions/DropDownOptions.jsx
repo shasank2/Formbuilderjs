@@ -5,30 +5,36 @@ import { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../../../../../context/GlobalContext'
 
 const DropDownOptions = (props) => {
-  const { individualItemState, setIndividualItemState, selectedItem } = props
-  const { formState } = useContext(GlobalContext);
-
-  const [dropDownSource, setDropDownSource] = useState("options")
+  const { individualItemState, setIndividualItemState, selectedItem, register, getValues, watch, setValue, errors } = props
+  const { formState, setformState } = useContext(GlobalContext);
 
   useEffect(() => {
     let foundSelectedObject = formState.find((elem) => elem.id === selectedItem)
-    setDropDownSource(foundSelectedObject.source)
+    setValue("selectedState.source", foundSelectedObject.source)
   }, [selectedItem])
-  
+
+  const handleChangeSourceInContext = (value) => {
+    let foundSelectedObject = formState.find((elem) => elem.id === selectedItem)
+    
+    // setformState((prev) => ({ ...prev,foundSelectedObject }))
+  }
 
   return (
     <>
       <Form.Check
         type="switch"
         label="Set Through API"
-        onChange={(e) => {
-          setDropDownSource(e.target.checked ? "url" : "options"),
-            setIndividualItemState((prev) => ({ ...prev, source: e.target.checked ? "url" : "options" }))
-        }}
-        checked={dropDownSource === "url" ? true : false}
+        {...register("selectedState.source", {
+          onChange: (e) => {
+            let val =  e.target.checked ? "url" : "options"
+            setValue("selectedState.source", val)
+            handleChangeSourceInContext(val)
+          },
+        })}
+        checked={watch("selectedState.source") === "url" ? true : false}
       />
       {
-        dropDownSource === "url" ?
+        watch("selectedState.source") === "url" ?
           <div>
             <Form.Group className="mb-3">
               <Form.Label>API URL</Form.Label>
