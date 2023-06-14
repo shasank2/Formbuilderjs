@@ -14,10 +14,16 @@ const DropDownOptions = (props) => {
   }, [selectedItem])
 
   const handleChangeSourceInContext = (value) => {
-    let foundSelectedObject = formState.find((elem) => elem.id === selectedItem)
-    
-    // setformState((prev) => ({ ...prev,foundSelectedObject }))
+    let updatedFormState = formState.map((elem) => {
+      if (elem.id === selectedItem) {
+        return ({ ...elem, source: value })
+      }
+      return elem
+    })
+    setformState(updatedFormState)
   }
+
+  console.log(errors)
 
   return (
     <>
@@ -26,22 +32,23 @@ const DropDownOptions = (props) => {
         label="Set Through API"
         {...register("selectedState.source", {
           onChange: (e) => {
-            let val =  e.target.checked ? "url" : "options"
+            let val = e.target.checked ? "url" : "options"
             setValue("selectedState.source", val)
             handleChangeSourceInContext(val)
           },
         })}
-        checked={watch("selectedState.source") === "url" ? true : false}
+        checked={formState.find((elem) => elem.id === selectedItem).source === "url" ? true : false}
       />
       {
-        watch("selectedState.source") === "url" ?
+        formState.find((elem) => elem.id === selectedItem).source === "url" ?
           <div>
             <Form.Group className="mb-3">
               <Form.Label>API URL</Form.Label>
               <Form.Control type="text" autoComplete="new-password"
-                onChange={(e) => setIndividualItemState((prev) => ({ ...prev, apiUrl: e.target.value }))}
-                value={individualItemState.apiUrl}
+                {...register("selectedState.apiUrl")}
+                isInvalid={!!errors?.selectedState?.apiUrl?.message}
               />
+              {errors?.selectedState?.apiUrl && <Form.Control.Feedback type="invalid">{errors?.selectedState?.apiUrl.message}</Form.Control.Feedback>}
             </Form.Group>
           </div>
           :
