@@ -13,4 +13,12 @@ module.exports = {
     'react-refresh/only-export-components': 'warn',
     "react/prop-types": "off"
   },
+  "no-unused-vars": [
+    "error",
+    {
+        "ignoreRestSiblings": true,
+        "destructuredArrayIgnorePattern": "[A-Z]",
+        "caughtErrors": "none"
+    }
+]
 }

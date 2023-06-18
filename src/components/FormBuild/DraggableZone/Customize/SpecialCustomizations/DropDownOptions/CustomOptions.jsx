@@ -4,11 +4,11 @@ import { Button, CloseButton, Form } from 'react-bootstrap'
 import { GlobalContext } from '../../../../../../context/GlobalContext'
 
 const CustomOptions = (props) => {
-  const { individualItemState, setIndividualItemState, selectedItem } = props
+  const { individualItemState, setIndividualItemState, selectedItem, register, getValues, watch, setValue, errors } = props
   const { formState } = useContext(GlobalContext)
 
   useEffect(() => {
-    let foundSelectedObject= formState.find((elem) => elem.id === selectedItem)
+    let foundSelectedObject = formState.find((elem) => elem.id === selectedItem)
     if (foundSelectedObject.options && foundSelectedObject.options?.length !== 0) {
       setIndividualItemState((prev) => ({
         ...prev,
@@ -49,7 +49,7 @@ const CustomOptions = (props) => {
       options: newOptionList
     }))
   }
-
+  console.log(errors)
   return (
     <div className='custom-option-container'>
       {
@@ -66,16 +66,18 @@ const CustomOptions = (props) => {
               <Form.Group className='mb-2'>
                 <Form.Label column="sm" >Label</Form.Label>
                 <Form.Control type="text" autoComplete="new-password" name='label'
-                  onChange={(e) => handleChange(e.target, index)}
-                  value={individualItemState.options[index].label}
+                  {...register(`selectedState.options.${index}.label`)}
+                  isInvalid={!!errors?.selectedState?.options[index]?.label?.message}
                 />
+                {errors?.selectedState?.options[index]?.label?.message && <Form.Control.Feedback type="invalid">{errors?.selectedState?.options[index]?.label?.message}</Form.Control.Feedback>}
               </Form.Group>
               <Form.Group>
                 <Form.Label column="sm" >Value</Form.Label>
                 <Form.Control type="text" autoComplete="new-password" name='value'
-                  onChange={(e) => handleChange(e.target, index)}
-                  value={individualItemState.options[index].value}
+                  {...register(`selectedState.options.${index}.value`)}
+                  isInvalid={!!errors?.selectedState?.options[index]?.value?.message}
                 />
+                {errors?.selectedState?.options[index]?.value?.message && <Form.Control.Feedback type="invalid">{errors?.selectedState?.options[index]?.value?.message}</Form.Control.Feedback>}
               </Form.Group>
             </div>
           )

@@ -46,8 +46,8 @@ const CustomizeZone = (props) => {
 
   const onSubmit = async () => {
     let updatedArray = formState.map((obj) => {
-      if (obj.id === getValues("selectedState.id")) {
-        return getValues("selectedState")
+      if (obj.id === watch("selectedState.id")) {
+        return watch("selectedState")
       }
       return obj
     })

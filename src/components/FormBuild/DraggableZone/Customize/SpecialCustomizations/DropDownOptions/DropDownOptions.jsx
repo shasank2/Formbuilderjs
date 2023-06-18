@@ -23,8 +23,6 @@ const DropDownOptions = (props) => {
     setformState(updatedFormState)
   }
 
-  console.log(errors)
-
   return (
     <>
       <Form.Check
@@ -37,6 +35,7 @@ const DropDownOptions = (props) => {
             handleChangeSourceInContext(val)
           },
         })}
+        value={watch("selectedState.source")}
         checked={formState.find((elem) => elem.id === selectedItem).source === "url" ? true : false}
       />
       {
@@ -56,6 +55,11 @@ const DropDownOptions = (props) => {
             individualItemState={individualItemState}
             setIndividualItemState={setIndividualItemState}
             selectedItem={selectedItem}
+            register={register}
+            getValues={getValues}
+            watch={watch}
+            setValue={setValue}
+            errors={errors}
           />
       }
     </>
