@@ -49,7 +49,7 @@ const CustomOptions = (props) => {
       options: newOptionList
     }))
   }
-  console.log(errors)
+
   return (
     <div className='custom-option-container'>
       {

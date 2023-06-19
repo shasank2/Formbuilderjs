@@ -54,6 +54,19 @@ const CustomizeZone = (props) => {
     setformState(updatedArray)
   }
 
+  const submitButtonHide = () => {
+    if (specialCustomizationStep === DROPDOWNSTEP && watch('selectedState.source')==="options" && !(watch('selectedState.options.0.label') && watch('selectedState.options.0.value'))) {
+      return null
+    }
+    else {
+      return (
+        <Button variant="primary" type="submit"  >
+          Submit
+        </Button>
+      )
+    }
+  }
+
   return (
     <Form className='customize-container' onSubmit={handleSubmit(onSubmit)} >
 
@@ -133,9 +146,7 @@ const CustomizeZone = (props) => {
             /> : null
 
       }
-      <Button variant="primary" type="submit"  >
-        Submit
-      </Button>
+      {submitButtonHide()}
     </Form>
   )
 }

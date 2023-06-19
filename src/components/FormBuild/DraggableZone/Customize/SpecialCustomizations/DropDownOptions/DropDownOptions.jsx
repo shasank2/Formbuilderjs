@@ -39,18 +39,7 @@ const DropDownOptions = (props) => {
         checked={formState.find((elem) => elem.id === selectedItem).source === "url" ? true : false}
       />
       {
-        formState.find((elem) => elem.id === selectedItem).source === "url" ?
-          <div>
-            <Form.Group className="mb-3">
-              <Form.Label>API URL</Form.Label>
-              <Form.Control type="text" autoComplete="new-password"
-                {...register("selectedState.apiUrl")}
-                isInvalid={!!errors?.selectedState?.apiUrl?.message}
-              />
-              {errors?.selectedState?.apiUrl && <Form.Control.Feedback type="invalid">{errors?.selectedState?.apiUrl.message}</Form.Control.Feedback>}
-            </Form.Group>
-          </div>
-          :
+        formState.find((elem) => elem.id === selectedItem).source === "options" ?
           <CustomOptions
             individualItemState={individualItemState}
             setIndividualItemState={setIndividualItemState}
@@ -61,6 +50,17 @@ const DropDownOptions = (props) => {
             setValue={setValue}
             errors={errors}
           />
+          :
+          <div>
+            <Form.Group className="mb-3">
+              <Form.Label>API URL</Form.Label>
+              <Form.Control type="text" autoComplete="new-password"
+                {...register("selectedState.apiUrl")}
+                isInvalid={!!errors?.selectedState?.apiUrl?.message}
+              />
+              {errors?.selectedState?.apiUrl && <Form.Control.Feedback type="invalid">{errors?.selectedState?.apiUrl.message}</Form.Control.Feedback>}
+            </Form.Group>
+          </div>
       }
     </>
   )

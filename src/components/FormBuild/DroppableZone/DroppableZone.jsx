@@ -31,6 +31,10 @@ const DroppableZone = (props) => {
       isRequried: false,
       validationMessage: "",
     }
+
+    if (elem.type==='drop-down') {
+      newElem.source = 'options'
+    }
     setformState((prev) => ([...prev, newElem]))
     // once dropped it is selected too
     setSelectedItem(newElem.id)

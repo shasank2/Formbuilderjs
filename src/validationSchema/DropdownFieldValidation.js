@@ -8,19 +8,22 @@ export const dropDownSchema = Yup.object().shape({
       then: () => Yup.string().required("URL is requried"),
       otherwise: () => Yup.string().notRequired(),
     }),
-    options: Yup.array().of(Yup.object().shape({
-      label: Yup.string().required('This field is required'),
-      value: Yup.string().required('This field is required'),
-    }))
+    // options: Yup.array()
+    // .of(Yup.object().shape({
+    //   label: Yup.string().required('This field is required'),
+    //   value: Yup.string().required('This field is required'),
+    // }))
 
-    // options:
-    //   Yup.string().when('source', {
-    //     is: "options",
-    //     then: () => Yup.array().of(Yup.object().shape({
-    //       label: Yup.string().required('This field is required'),
-    //       value: Yup.string().required('This field is required'),
-    //     })),
-    //     otherwise: () => Yup.string().notRequired(),
-    //   })
+    options: Yup.array().when('source', {
+        is: "options",
+        then: () => Yup.array().of(Yup.object().shape({
+          label: Yup.string().required('This field is required'),
+          value: Yup.string().required('This field is required'),
+        })),
+        otherwise: () => Yup.array().of(Yup.object().shape({
+          label: Yup.string(),
+          value: Yup.string(),
+        })),
+      })
   })
 });
