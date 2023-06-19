@@ -10,7 +10,7 @@ const DroppableZone = (props) => {
 
   const { formState, setformState, setSpecialCustomizationStep } = useContext(GlobalContext);
 
-  const [{},drop] = useDrop(() => ({
+  const [{ }, drop] = useDrop(() => ({
     accept: "builderComponent",
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -32,7 +32,7 @@ const DroppableZone = (props) => {
       validationMessage: "",
     }
 
-    if (elem.type==='drop-down') {
+    if (elem.type === 'drop-down') {
       newElem.source = 'options'
     }
     setformState((prev) => ([...prev, newElem]))
@@ -51,11 +51,19 @@ const DroppableZone = (props) => {
     <div ref={drop} className='droppable-zone'>
       {formState.map((elem, index) => {
         return (
-          <div key={index}
-            className={`${selectedItem === elem.id ? "droppable-items-selected" : "droppable-items"}`}
-            onClick={() => handleSelectItem(elem.id)}>
-            {elem.text}
-          </div>
+          <>
+            <div key={index}
+              className={`${selectedItem === elem.id ? "droppable-items-selected" : "droppable-items"}`}
+              onClick={() => handleSelectItem(elem.id)}>
+              {elem.text}
+            </div>
+            <div className="droppable-items">
+              <div className="heading">
+                
+              </div>
+
+            </div>
+          </>
         )
       })}
 
