@@ -3,17 +3,23 @@ import { useDrag } from 'react-dnd'
 
 const DraggableItem = (props) => {
 
-  let { componentType, text } = props
+  let { data } = props
 
   const [, dragRef] = useDrag(() => ({
     type: 'builderComponent',
-    item: { type: componentType, text: text },
+    item: { type: data.componentType, text: data.text },
   }))
 
   return (
     <>
       <span ref={dragRef} className='items'>
-        {text}
+        <div className='item-info'>
+          <span className='item-info-icon'>{data.icon}</span>
+          {data.text}
+        </div>
+        <div className='item-sample'>
+        {data.sample}
+        </div>
       </span>
     </>
   )

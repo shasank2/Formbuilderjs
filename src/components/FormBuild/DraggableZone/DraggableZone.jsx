@@ -1,25 +1,72 @@
 
-import { Button } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import CustomizeZone from './Customize/CustomizeZone'
 import DraggableItem from './DraggableItem'
 import React from 'react'
+import { MdTextFields } from 'react-icons/md'
+import { RxDropdownMenu } from 'react-icons/rx'
+import { CiCalendarDate } from 'react-icons/ci'
+import { IoMdCheckbox } from 'react-icons/io'
+import { RiRadioButtonFill,RiInputMethodFill } from 'react-icons/ri'
 
 const builderComponentsList = [
   {
     "type": "text-field",
-    "text": "Text Field"
+    "text": "Text Field",
+    "icon": <MdTextFields />,
+    "sample": <Form.Control size="sm" disabled placeholder="Text Field" />
   },
   {
     "type": "drop-down",
-    "text": "Drop Down"
+    "text": "Drop Down",
+    "icon": <RxDropdownMenu />,
+    "sample": (
+      <Form.Select size="sm" disabled>
+        <option disabled >Option 1</option>
+      </Form.Select>
+    )
   },
   {
     "type": "check-box",
-    "text": "Check Box"
+    "text": "Check Box",
+    "icon": <IoMdCheckbox />,
+    "sample": (
+      <div className='sample-checkbox-container'>
+        <Form.Check
+          size="sm"
+          disabled
+          type="checkbox"
+          label="Label"
+        />
+      </div>
+    )
+  },
+  {
+    "type": "radio-button",
+    "text": "Radio Button",
+    "icon": <RiRadioButtonFill />,
+    "sample": (
+      <div className='sample-checkbox-container'>
+        <Form.Check
+          size="sm"
+          disabled
+          type="radio"
+          label="Label"
+        />
+      </div>
+    )
+  },
+  {
+    "type": "text-area",
+    "text": "Text Area",
+    "icon": <RiInputMethodFill />,
+    "sample": <Form.Control size="sm" as="textarea" rows={1} disabled />
   },
   {
     "type": "date-picker",
-    "text": "Date-Picker"
+    "text": "Date Picker",
+    "icon": <CiCalendarDate />,
+    "sample": <Form.Control size="sm" disabled placeholder="DD/MM/YYYY" />
   }
 ]
 
@@ -38,7 +85,7 @@ const DraggableZone = (props) => {
                 builderComponentsList.map((elem, index) => {
                   return (
                     <React.Fragment key={index} >
-                      <DraggableItem componentType={elem.type} text={elem.text} />
+                      <DraggableItem data={elem} />
                     </React.Fragment>
                   )
                 })

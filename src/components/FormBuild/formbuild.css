@@ -24,11 +24,36 @@
   gap: .8rem;
 }
 
-.draggablezone-grid>.items {
+.draggablezone-grid .items {
   width: 100%;
   height: fit-content;
-  padding: 5px 3px;
+  padding: .5rem;
   border: 1px solid rgb(165, 165, 165);
   cursor: grab;
+  border-radius: 3px;
+}
+
+.sample-checkbox-container{
+  border: .1px solid rgb(189, 189, 189);
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 2px 7px;
+  background-color: #e9ecef;
+}
+
+.draggablezone-grid .item-info{
+  font-size: .8rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.item-info-icon{
+  font-size: 1.4rem;
+  margin-top: -3px;
+}
+
+.item-sample{
+  margin: .3rem;
 }
 
