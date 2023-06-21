@@ -40,6 +40,7 @@ const CustomizeZone = (props) => {
 
   useEffect(() => {
     let foundSelectedObject = formState.find((elem) => elem.id === selectedItem)
+    console.log(foundSelectedObject)
     setValue("selectedState", foundSelectedObject)
     setFieldType(watch("selectedState.type"));
   }, [selectedItem])

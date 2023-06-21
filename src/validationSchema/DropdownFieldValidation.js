@@ -8,11 +8,6 @@ export const dropDownSchema = Yup.object().shape({
       then: () => Yup.string().required("URL is requried"),
       otherwise: () => Yup.string().notRequired(),
     }),
-    // options: Yup.array()
-    // .of(Yup.object().shape({
-    //   label: Yup.string().required('This field is required'),
-    //   value: Yup.string().required('This field is required'),
-    // }))
 
     options: Yup.array().when('source', {
         is: "options",

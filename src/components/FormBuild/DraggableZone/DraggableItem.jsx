@@ -4,10 +4,11 @@ import { useDrag } from 'react-dnd'
 const DraggableItem = (props) => {
 
   let { data } = props
+  console.log(data)
 
   const [, dragRef] = useDrag(() => ({
     type: 'builderComponent',
-    item: { type: data.componentType, text: data.text },
+    item: { type: data.type, text: data.text },
   }))
 
   return (
