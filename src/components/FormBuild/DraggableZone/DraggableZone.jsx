@@ -60,7 +60,7 @@ const builderComponentsList = [
     "type": "text-area",
     "text": "Text Area",
     "icon": <RiInputMethodFill />,
-    "sample": <Form.Control size="sm" as="textarea" rows={1} disabled />
+    "sample": <Form.Control size="sm" as="textarea" rows={1} disabled className='sample-textarea' placeholder='Text Area' />
   },
   {
     "type": "date-picker",
