@@ -4,6 +4,8 @@ import { useDrop } from "react-dnd"
 import { GlobalContext } from "../../../context/GlobalContext"
 import { v4 } from 'uuid';
 import { Form } from "react-bootstrap";
+import { MdTextFields } from "react-icons/md";
+import DroppableSampleField from "./DroppableSampleField";
 
 const DroppableZone = (props) => {
 
@@ -54,18 +56,9 @@ const DroppableZone = (props) => {
         return (
           <>
             <div key={index}
-              className={`${selectedItem === elem.id ? "droppable-items-selected" : "droppable-items"}`}
+              className={` ${selectedItem === elem.id ? "droppable-items-selected" : "droppable-items"}`}
               onClick={() => handleSelectItem(elem.id)}>
-              {elem.text}
-            </div>
-            <div className="droppable-items">
-              <div className="item-heading">
-                Text Field
-              </div>
-              <div className="item-body">
-              <Form.Control size="sm" disabled placeholder="Text Field" />
-              </div>
-
+              <DroppableSampleField itemData={elem} />
             </div>
           </>
         )

@@ -8,33 +8,54 @@
 .droppable-items {
   border: 1px solid rgb(182, 182, 182);
   border-radius: 5px;
-  margin: 2px 6px;
+  margin: .7rem .5rem;
   padding-top: .5rem;
   cursor: pointer;
-  /* background-color: white; */
+  background-color: white;
   font-size: 13px;
 }
 
-.droppable-items:hover{
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+.droppable-items:hover {
+  box-shadow: #0275d8 0px 0px 0px 1px;
 }
 
 .droppable-items-selected {
-  border: 1px solid #0275d8;
+  border: 1px solid rgb(182, 182, 182);
   border-radius: 5px;
-  margin: 2px 6px;
+  margin: .7rem .5rem;
+  padding-top: .5rem;
   cursor: pointer;
+  background-color: white;
   font-size: 13px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow: #0275d8 0px 0px 0px 1px;
 }
 
-.droppable-items .item-heading{
+.item-heading {
   margin: 0 .5rem;
-
+  padding-bottom: .2rem;
   font-weight: 500;
-  border-bottom: 1px solid gray;
+  color: rgb(67, 67, 67);
+  border-bottom: 1px solid rgb(208, 208, 208);
+  display: flex;
+  gap: .6rem;
 }
 
-.droppable-items .item-body{
-  padding: .6rem 0.5rem
+.item-body {
+  padding: .7rem .8rem
+}
+
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+  box-shadow: inset 0 -1px 0 #ddd;
+  border-color: #ddd;
 }

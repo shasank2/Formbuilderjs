@@ -21,8 +21,8 @@ const builderComponentsList = [
     "text": "Drop Down",
     "icon": <RxDropdownMenu />,
     "sample": (
-      <Form.Select size="sm" disabled>
-        <option disabled >Option 1</option>
+      <Form.Select size="sm" disabled  value={"default"}>
+        <option disabled value={"default"} >Option 1</option>
       </Form.Select>
     )
   },
