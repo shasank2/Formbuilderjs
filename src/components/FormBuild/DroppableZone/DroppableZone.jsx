@@ -3,6 +3,7 @@ import "./droppablezone.css"
 import { useDrop } from "react-dnd"
 import { GlobalContext } from "../../../context/GlobalContext"
 import { v4 } from 'uuid';
+import { Form } from "react-bootstrap";
 
 const DroppableZone = (props) => {
 
@@ -58,8 +59,11 @@ const DroppableZone = (props) => {
               {elem.text}
             </div>
             <div className="droppable-items">
-              <div className="heading">
-                
+              <div className="item-heading">
+                Text Field
+              </div>
+              <div className="item-body">
+              <Form.Control size="sm" disabled placeholder="Text Field" />
               </div>
 
             </div>
